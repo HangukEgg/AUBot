@@ -1,19 +1,19 @@
 const getRandFile = require('./getRandFile');
+const sendImage = require('./sendImage');
 
-const susVC = async function(message) {
-    let EEAID = await message.author.id;
-    let EEMem = message.guild.members.cache.get(EEAID);
+const susVC = async function(message, fetch) {
+    let channelToJoin = message.member.voice.channel;
     let pathToAudio = './audios/' + getRandFile();
-    if(EEMem != null) {
-        if(EEMem.voice.channel != null) {
-            let channel = EEMem.voice.channel;
-            channel.join().then(connection => {
-                const dispatcher = connection.play(pathToAudio);
-                dispatcher.on('finish', finish => {
-                    channel.leave();
-                });
+    if(channelToJoin) {
+        channelToJoin.join().then(connection => {
+            const dispatcher = connection.play(pathToAudio);
+            dispatcher.on('finish', finish => {
+                channelToJoin.leave();
             });
-        }
+        });
+    }
+    else {
+        sendImage(message, fetch);
     }
 }
 module.exports = susVC;

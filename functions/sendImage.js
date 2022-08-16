@@ -5,7 +5,7 @@ const sendImage = async function(message, fetch) {
     let randKey = keywordsArray[randIndex];
     let randKey2 = keywordsArray[randIndex];
     while(randKey === randKey2) {
-        randKey2 = keywordsArray[randIndex];
+        randKey2 = keywordsArray[Math.floor(Math.random() * keywordsArray.length)];
     }
     
     let keywords = randKey + " " + randKey2;

@@ -23,8 +23,7 @@ client.on('message', message => {
                 sendPhrase(message);
                 break;
             case 2: 
-                susVC(message);
-                break;
+                susVC(message, fetch);
         }
     }
     return;

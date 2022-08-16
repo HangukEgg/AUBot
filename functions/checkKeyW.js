@@ -3,8 +3,9 @@ const checkKeyW = function(message) {
                     "sus", "crewmate", "vent", "report", "emergency meeting",
                     "task", "amogus"];
     if(message.author.bot) return;
+    let content = message.content.toLowerCase();
     for(var i = 0; i < susArray.length; i++) {
-        if(message.content.toLowerCase().includes(susArray[i])) { 
+        if(content.includes(susArray[i])) { 
             return true;
         }
     }
