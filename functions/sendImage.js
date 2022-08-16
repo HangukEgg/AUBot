@@ -1,9 +1,8 @@
 const sendImage = async function(message, fetch) {
     const keywordsArray = ['amogus', 'amongus', 'among us', 'imposter'];
-    let randIndex = Math.floor(Math.random() * keywordsArray.length);
 
-    let randKey = keywordsArray[randIndex];
-    let randKey2 = keywordsArray[randIndex];
+    let randKey = keywordsArray[Math.floor(Math.random() * keywordsArray.length)];
+    let randKey2 = keywordsArray[Math.floor(Math.random() * keywordsArray.length)];
     while(randKey === randKey2) {
         randKey2 = keywordsArray[Math.floor(Math.random() * keywordsArray.length)];
     }
