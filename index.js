@@ -1,5 +1,10 @@
-const Discord = require('discord.js');
-const client = new Discord.Client();
+const {Client, GatewayIntentBits } = require('discord.js');
+const client = new Client({ intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.GuildMembers,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildVoiceStates,]});
 const dotenv = require('dotenv'); 
 dotenv.config();
 const fetch = require('node-fetch');
@@ -12,7 +17,7 @@ const sendPhrase = require("./functions/sendPhrase");
 const susVC = require("./functions/susVC");
 
 
-client.on('message', message => {
+client.on('messageCreate', (message) => {
     if(checkKeyW(message)) {
         let randomNumber = Math.floor(Math.random() * 3);
         switch(randomNumber) {
@@ -30,9 +35,10 @@ client.on('message', message => {
 })
 
 client.on('ready', () => {
-    console.log("good to go");
+    console.log("\ngood to go\n\nServers:");
     client.guilds.cache.forEach(g => {
         console.log(g.name);
     })
+    console.log("\n");
     botPresence(client);
 }); 

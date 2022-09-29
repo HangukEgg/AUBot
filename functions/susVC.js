@@ -1,21 +1,27 @@
+const { joinVoiceChannel, createAudioPlayer, createAudioResource, AudioPlayerStatus } = require('@discordjs/voice');
 const getRandFile = require('./getRandFile');
 const sendImage = require('./sendImage');
 
 const susVC = async function(message, fetch) {
-    let channelToJoin = message.member.voice.channel;
     let pathToAudio = './audios/' + getRandFile();
-    if(channelToJoin) {
-        try { // try in case the bot does not have access to vc
-            channelToJoin.join().then(connection => {
-                const dispatcher = connection.play(pathToAudio);
-                dispatcher.on('finish', finish => {
-                    channelToJoin.leave();
-                });
-            });
-        }
-        catch(e){sendImage(message, fetch);}
+    try {
+        const connection = joinVoiceChannel({
+            channelId: message.member.voice.channelId,
+            guildId: message.guildId,
+            adapterCreator: message.guild.voiceAdapterCreator
+        })
+
+        const player = createAudioPlayer();
+        const resource = createAudioResource(pathToAudio);
+
+        player.play(resource, {seek: 0, volume: 1.0})
+        connection.subscribe(player);
+        player.on(AudioPlayerStatus.Idle, () => {
+            connection.destroy();
+        })
     }
-    else {
+    catch(e) {
+        console.log(e);
         sendImage(message, fetch);
     }
 }
