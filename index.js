@@ -16,13 +16,18 @@ const botPresence = require("./functions/botPresence");
 const sendPhrase = require("./functions/sendPhrase");
 const susVC = require("./functions/susVC");
 
+const susArray = ["sus", "among us", "amongus", "imposter",
+                  "crewmate", "vent", "report", "emergency meeting",
+                  "task", "amogus"];
+
+const keywordsArray = ['amogus', 'amongus', 'among us', 'imposter'];
 
 client.on('messageCreate', (message) => {
-    if(checkKeyW(message)) {
+    if(checkKeyW(message, susArray)) {
         let randomNumber = Math.floor(Math.random() * 3);
         switch(randomNumber) {
             case 0:
-                sendImage(message, fetch);
+                sendImage(message, fetch, keywordsArray);
                 break;
             case 1:
                 sendPhrase(message);
