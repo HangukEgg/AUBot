@@ -22,6 +22,8 @@ const susArray = ["sus", "among us", "amongus", "imposter",
 
 const keywordsArray = ['amogus', 'amongus', 'among us', 'imposter'];
 
+const reArray = ["AMOGUS", "YOU'RE THE IMPOSTER!", "YOU ARE SUS!"]; 
+
 client.on('messageCreate', (message) => {
     if(checkKeyW(message, susArray)) {
         let randomNumber = Math.floor(Math.random() * 3);
@@ -30,10 +32,11 @@ client.on('messageCreate', (message) => {
                 sendImage(message, fetch, keywordsArray);
                 break;
             case 1:
-                sendPhrase(message);
+                sendPhrase(message, reArray);
                 break;
             case 2: 
-                susVC(message, fetch);
+                susVC(message, fetch, keywordsArray);
+                break;
         }
     }
     return;
