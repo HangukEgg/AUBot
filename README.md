@@ -1,5 +1,5 @@
 # AUBot
-shitty discord among us bot
+Among Us-themed Discord Bot
 
 # How It Works
 - send a message of any length containing at least one keyword from [this](https://pastebin.com/raw/WNSFrkvm) list
